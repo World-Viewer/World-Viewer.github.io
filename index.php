@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/css/ol.css" type="text/css">
 
 
@@ -18,31 +18,46 @@
 
         .header h2 {
             font-size: 4vw;
-            opacity:0.75;
+            opacity: 0.75;
 
         }
 
         .header {
-            
-            background-color:white;
+
+            background-color: white;
             width: 100vw;
             position: absolute;
             top: 0;
             left: 0;
             text-align: center;
-            line-height:0.55;
-            margin-top:-0;
+            line-height: 0.55;
+            margin-top: -0;
 
+        }
+
+        iframe {
+            height: 0;
+            width: 0;
+        }
+
+
+
+        .place {
+            font-size: 0;
+            height: 0;
+            width: 0;
         }
 
     </style>
 
-    
 
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!--    1 - include OpenLayers-->
     <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/build/ol.js"></script>
-    
-    
+
+
 
 
 
@@ -70,13 +85,69 @@
     <div id="info"></div>
 
 
+    <div class='place'>
+        <h3>Location: Times Square, NYC <br> Longitude/Latitude(-73.9855,40.7580)</h3>
+
+        <iframe src="https://www.youtube.com/embed/eJ7ZkQ5TC08" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+    </div>
+
+    <div class='place'>
+
+        <h3>Location: La Plata, Misouri <br> Longitude/Latitude(-92.490924,40.023942)</h3>
+
+        <iframe src="https://www.youtube.com/embed/AAQUGsUzWbE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+    </div>
+
 
 
 
     <script type="text/javascript">
         ol.proj.useGeographic();
-        var place = [0, 68.66];
+        //longitude = vert, lattitude = horiz...  
+        //format = (long, lat) 
+        
+        var places = [];
+        
+        $('.place').each(function(index) {
+            
+            //using REGEX to turn the innerHTML into dict, append that dict to places array...
+            let reg = "Location: (.+?) <br> Longitude/Latitude\((.+?),(.+?)\)";
+            var info = $(this).html();
+            var rt = info.match(reg);
+            
+            var location = rt[1]
+            var longlat = [rt[2], rt[3]];
+            
+            var place_info = {
+                "name":location,
+                "longitude":longlat[0],
+                "latitude":longlat[1],
+                "iframe_url":""
+            };
+            
+            places.push(place_info);
+            
+        });
+        
+        
+        
+        
+        
+
+
+
+
+        /*example locations... point var essential for operation... */        
+        var place = [-73.9855, 40.7580];
         var point = new ol.geom.Point(place);
+
+
+        var place2 = [-92.490924,40.023942];
+        var point2 = new ol.geom.Point(place2);
+        
+
 
 
         var map = new ol.Map({
@@ -99,7 +170,7 @@
 
                 new ol.layer.Vector({
                     source: new ol.source.Vector({
-                        features: [new ol.Feature(point)],
+                        features: [new ol.Feature(point), new ol.Feature(point2)],
                     }),
                     style: new ol.style.Style({
                         image: new ol.style.Circle({
@@ -152,14 +223,20 @@
             if (feature) {
                 var coordinate = feature.getGeometry().getCoordinates();
                 popup.setPosition(coordinate);
-                $(element).popover({
-                    container: element.parentElement,
-                    html: true,
-                    sanitize: false,
-                    content: formatCoordinate(coordinate),
-                    placement: 'top',
-                });
-                $(element).popover('show');
+                alert(coordinate);
+
+
+
+
+
+                //                $(element).popover({
+                //                    container: element.parentElement,
+                //                    html: true,
+                //                    sanitize: false,
+                //                    content: formatCoordinate(coordinate),
+                //                    placement: 'top',
+                //                });
+                //                $(element).popover('show');
             } else {
                 $(element).popover('dispose');
             }
