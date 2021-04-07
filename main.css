@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Libre+Franklin:wght@100;117&display=swap');
+
+
+
+:root {
+
+    /*main colors*/
+    --grey: #292C35;
+    --gold: #D6B55B;
+
+    --font1: 'Anton', sans-serif;
+    --font2: 'Libre Franklin', sans-serif;
+}
+
+.map {
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.header h2 {
+    font-size: 4vw;
+    opacity: 1;
+
+}
+
+.header {
+
+    background: linear-gradient(180deg, rgba(18, 25, 46, 0.95) 33%, rgba(41, 44, 53, 0.8995798148360907) 100%);
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+    line-height: 0.55;
+    margin-top: -0;
+    opacity: 0.8;
+    -webkit-box-shadow: -1px 9px 27px -3px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: -1px 9px 27px -3px rgba(0, 0, 0, 0.75);
+    box-shadow: -1px 9px 27px -3px rgba(0, 0, 0, 0.75);
+
+
+}
+
+.footer {
+    width: 100vw;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3vh;
+    background: linear-gradient(0deg,rgba(41, 44, 53, 0.8995798148360907) 100%, rgba(18, 25, 46, 0.95) 33%);
+    opacity: 0.8;
+
+}
+
+iframe {
+    width: 0;
+    height: 0;
+}
+
+
+
+button {
+    z-index: inherit;
+}
+
+
+
+.place {
+    font-size: 0;
+    height: 0;
+    width: 0;
+}
+
+
+
+
+#popout {
+    position: absolute;
+    min-height: 50vh;
+    width: 50vw;
+    background: rgba(41, 44, 53, 0.8995798148360907);
+    -webkit-box-shadow: -1px 5px 27px -3px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: -1px 5px 27px -3px rgba(0, 0, 0, 0.75);
+    box-shadow: -1px 5px 27px -3px rgba(0, 0, 0, 0.75);
+
+    text-align: center;
+    align-content: center;
+    z-index: 5;
+    top: 25vh;
+    left: 25vw;
+    color: var(--gold);
+
+
+
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-top: 0.5;
+    padding-bottom: 1.5%;
+
+}
+
+#popout iframe {
+    width: 40vw;
+    height: 40vh;
+    padding-bottom: 5vh;
+}
+
+
+#popout h3 {
+    font-family: var(--font1);
+    font-weight: 400;
+    font-size: 3rem;
+
+}
+
+#close {
+    font-weight: 100;
+    font-family: var(--font2);
+
+
+    padding-left: 1%;
+    padding-right: 1%;
+
+    text-align: center;
+
+    border-radius: 5px;
+    background: inherit;
+    color: var(--gold);
+
+}
+
+
+
+
+
+
+
+/*completely hiding whichever elements randomly generated from OpenLayers...*/
+
+.ol-zoom-in,
+.ol-zoom-out,
+.ol-attribution,
+.ol-zoom,
+.ol-control,
+#info {
+    height: 0;
+    width: 0;
+    opacity: 0;
+    font-size: 0;
+}
+
+
+
+
+
+#mainLogo {
+    max-height: 15vh;
+    max-width: 15vw;
+    opacity: 1;
+}
